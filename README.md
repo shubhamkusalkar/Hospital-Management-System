@@ -451,11 +451,4 @@ If you encounter connection issues when running with Docker:
    - **JWT validation failure**: Check token expiration or secret key configuration
    - **Role-based access issues**: Verify user has appropriate roles assigned
 
-## 📊 Future Enhancements
 
-- Frontend UI with React or Angular
-- Email notifications for appointments
-- Patient portal for self-service appointment booking
-- Reporting and analytics dashboard
-- Integration with external medical systems
-- Mobile application for doctors and patients
