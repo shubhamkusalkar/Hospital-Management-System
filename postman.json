@@ -1,0 +1,902 @@
+{
+  "info": {
+    "_postman_id": "b5c4d5e3-a8a7-4f12-9c8b-57e9876f1e2d",
+    "name": "Hospital Management System",
+    "description": "A collection for testing all APIs in the Hospital Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for user authentication and registration",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin1\",\n  \"email\": \"admin@hospital.com\",\n  \"password\": \"password123\",\n  \"roles\": [\"admin\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "signup"]
+            },
+            "description": "Register a new user with ADMIN role"
+          },
+          "response": []
+        },
+        {
+          "name": "Sign Up (Doctor)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"doctor1\",\n  \"email\": \"doctor@hospital.com\",\n  \"password\": \"password123\",\n  \"roles\": [\"doctor\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "signup"]
+            },
+            "description": "Register a new user with DOCTOR role"
+          },
+          "response": []
+        },
+        {
+          "name": "Sign Up (Nurse)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"nurse1\",\n  \"email\": \"nurse@hospital.com\",\n  \"password\": \"password123\",\n  \"roles\": [\"nurse\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "signup"]
+            },
+            "description": "Register a new user with NURSE role"
+          },
+          "response": []
+        },
+        {
+          "name": "Sign In",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/signin",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "signin"]
+            },
+            "description": "Login and get JWT token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "description": "Endpoints for managing patients",
+      "item": [
+        {
+          "name": "Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/patients",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients"]
+            },
+            "description": "Get all patients (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/patients/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients", "1"]
+            },
+            "description": "Get a patient by ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"dateOfBirth\": \"1990-01-15\",\n  \"gender\": \"Male\",\n  \"phone\": \"123-456-7890\",\n  \"email\": \"john.doe@example.com\",\n  \"address\": \"123 Main St, Anytown, US\",\n  \"medicalHistory\": \"No significant medical history\",\n  \"allergies\": \"Penicillin\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/patients",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients"]
+            },
+            "description": "Create a new patient (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"dateOfBirth\": \"1990-01-15\",\n  \"gender\": \"Male\",\n  \"phone\": \"123-456-7890\",\n  \"email\": \"john.doe@example.com\",\n  \"address\": \"456 Park Ave, Anytown, US\",\n  \"medicalHistory\": \"No significant medical history\",\n  \"allergies\": \"Penicillin, Sulfa\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/patients/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients", "1"]
+            },
+            "description": "Update a patient (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/patients/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients", "1"]
+            },
+            "description": "Delete a patient (requires ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/patients/search?lastName=Doe",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "patients", "search"],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "Doe"
+                }
+              ]
+            },
+            "description": "Search patients by last name (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "description": "Endpoints for managing doctors",
+      "item": [
+        {
+          "name": "Get All Doctors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/doctors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors"]
+            },
+            "description": "Get all doctors (public access)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Doctor by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/doctors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors", "1"]
+            },
+            "description": "Get a doctor by ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"specialization\": \"Cardiology\",\n  \"licenseNumber\": \"MED12345\",\n  \"phone\": \"987-654-3210\",\n  \"email\": \"jane.smith@hospital.com\",\n  \"bio\": \"Experienced cardiologist with 10 years of practice\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/doctors?userId=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Create a new doctor (requires ADMIN role). The userId parameter should be the ID of a user with DOCTOR role."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"specialization\": \"Cardiology\",\n  \"licenseNumber\": \"MED12345\",\n  \"phone\": \"987-654-3210\",\n  \"email\": \"jane.smith@hospital.com\",\n  \"bio\": \"Experienced cardiologist with 15 years of practice and specialized in heart failure treatment\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/doctors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors", "1"]
+            },
+            "description": "Update a doctor (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Doctor",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/doctors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors", "1"]
+            },
+            "description": "Delete a doctor (requires ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Doctors by Specialization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/doctors/specialization/Cardiology",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors", "specialization", "Cardiology"]
+            },
+            "description": "Get doctors by specialization (public access)"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Doctors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/doctors/search?lastName=Smith",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors", "search"],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "Smith"
+                }
+              ]
+            },
+            "description": "Search doctors by last name (public access)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "description": "Endpoints for managing appointments",
+      "item": [
+        {
+          "name": "Get All Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments"]
+            },
+            "description": "Get all appointments (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointment by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "1"]
+            },
+            "description": "Get an appointment by ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDateTime\": \"2023-06-15T14:30:00\",\n  \"reason\": \"Annual checkup\",\n  \"status\": \"SCHEDULED\",\n  \"notes\": \"Patient requested afternoon appointment\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/appointments?patientId=1&doctorId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments"],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "1"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Create a new appointment (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDateTime\": \"2023-06-15T15:00:00\",\n  \"reason\": \"Annual checkup\",\n  \"status\": \"RESCHEDULED\",\n  \"notes\": \"Rescheduled to 3 PM at patient's request\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "1"]
+            },
+            "description": "Update an appointment (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "1"]
+            },
+            "description": "Delete an appointment (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointments by Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/patient/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "patient", "1"]
+            },
+            "description": "Get appointments by patient ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointments by Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/doctor/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "doctor", "1"]
+            },
+            "description": "Get appointments by doctor ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointments by Date",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/appointments/date?date=2023-06-15",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "appointments", "date"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2023-06-15"
+                }
+              ]
+            },
+            "description": "Get appointments by date (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Medical Records",
+      "description": "Endpoints for managing medical records",
+      "item": [
+        {
+          "name": "Get All Medical Records",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records"]
+            },
+            "description": "Get all medical records (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Medical Record by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records", "1"]
+            },
+            "description": "Get a medical record by ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Medical Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Hypertension\",\n  \"treatment\": \"Prescribed medication and diet changes\",\n  \"prescription\": \"Lisinopril 10mg daily\",\n  \"notes\": \"Patient advised to reduce sodium intake and increase physical activity\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records?patientId=1&doctorId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records"],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "1"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Create a new medical record (requires DOCTOR role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Medical Record",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Stage 1 Hypertension\",\n  \"treatment\": \"Prescribed medication, diet changes, and regular exercise\",\n  \"prescription\": \"Lisinopril 10mg daily, Follow-up in 4 weeks\",\n  \"notes\": \"Patient advised to reduce sodium intake, increase physical activity, and monitor blood pressure daily\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records", "1"]
+            },
+            "description": "Update a medical record (requires DOCTOR role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Medical Record",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records", "1"]
+            },
+            "description": "Delete a medical record (requires ADMIN role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Medical Records by Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records/patient/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records", "patient", "1"]
+            },
+            "description": "Get medical records by patient ID (requires DOCTOR, ADMIN, or NURSE role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Medical Records by Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/medical-records/doctor/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "medical-records", "doctor", "1"]
+            },
+            "description": "Get medical records by doctor ID (requires DOCTOR or ADMIN role)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (pm.response.code === 200 && pm.response.json().token) {",
+          "    pm.environment.set(\"token\", pm.response.json().token);",
+          "    console.log(\"Token saved to environment\");",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
